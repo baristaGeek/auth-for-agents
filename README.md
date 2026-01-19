@@ -8,27 +8,16 @@ Once you give an AI agent your OAuth tokens, it can do anything with no oversigh
 
 ## Getting Started
 
-1. **Go to the dashboard** at `http://localhost:3000` (after running `npm run dev`)
+1. **Go to the dashboard** at `https://auth-for-agents.vercel.app/`
 2. **Create an API key** - Go to "Agents" → "New Agent" and copy your API key
 3. **Create approval flows** - Go to "Rules" → "New Rule" to define when actions need approval
-4. **Run the sample app**:
+4. **(Optional) Test run with the sample app**:
    ```bash
    ./start-ai-agent.sh YOUR_API_KEY YOUR_EMAIL@gmail.com
    ```
 
 That's it. The AI agent will monitor your Gmail, compose replies, and ask for your approval before sending.
 
-## Setup
-
-```bash
-npm install
-npm run dev
-```
-
-You'll need:
-- Supabase account (run `supabase/schema.sql`)
-- Google OAuth credentials
-- Environment variables (see `.env.example`)
 
 ## License
 
