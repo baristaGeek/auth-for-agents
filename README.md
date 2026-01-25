@@ -1,6 +1,6 @@
 # Auth for Agents
 
-**Auth0 for AI agents** - Give AI agents access to your services with human-in-the-loop approval.
+Auth for Agents is a proxy layer between AI agents and OAuth-based APIs that enforces human approval and policy rules before actions are executed. It records every requested action, decision, and token usage for auditability.
 
 ## Why This is Cool
 
