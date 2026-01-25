@@ -142,7 +142,7 @@ export default function DashboardPage() {
                       <h3 className="text-lg font-semibold">
                         {approval.agent?.name || 'Unknown Agent'}
                       </h3>
-                      <Badge variant="error">Action Required</Badge>
+                      <Badge variant="danger">Action Required</Badge>
                     </div>
                     <p className="text-gray-700 mb-3 text-lg">{approval.action_summary}</p>
                     <details className="mb-3">

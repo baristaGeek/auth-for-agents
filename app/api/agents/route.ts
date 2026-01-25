@@ -6,7 +6,7 @@ import { z } from 'zod';
 const createAgentSchema = z.object({
   name: z.string().min(1).max(100),
   description: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.any()).optional(),
 });
 
 // POST /api/agents - Create a new agent
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid request data', details: error.issues }, { status: 400 });
     }
     console.error('Error in POST /api/agents:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

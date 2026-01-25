@@ -61,19 +61,16 @@ export default function DashboardLayout({
           {/* Navigation */}
           <nav className="flex-1 p-4 space-y-1">
             {navigation.map((item) => {
-              const Component = item.disabled ? 'div' : Link;
-              return (
-                <Component
-                  key={item.name}
-                  {...(!item.disabled ? { href: item.href } : {})}
-                  className={`flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                    item.disabled
-                      ? 'text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-60'
-                      : isActive(item.href)
-                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
-                      : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                  }`}
-                >
+              const className = `flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+                item.disabled
+                  ? 'text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-60'
+                  : isActive(item.href)
+                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
+                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+              }`;
+
+              const content = (
+                <>
                   <div className="flex items-center">
                     <span className="mr-3 text-lg">{item.icon}</span>
                     {item.name}
@@ -83,7 +80,17 @@ export default function DashboardLayout({
                       {item.badge}
                     </span>
                   )}
-                </Component>
+                </>
+              );
+
+              return item.disabled ? (
+                <div key={item.name} className={className}>
+                  {content}
+                </div>
+              ) : (
+                <Link key={item.name} href={item.href} className={className}>
+                  {content}
+                </Link>
               );
             })}
           </nav>

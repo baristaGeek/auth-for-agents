@@ -6,7 +6,7 @@ const updateAgentSchema = z.object({
   name: z.string().min(1).max(100).optional(),
   description: z.string().optional(),
   is_active: z.boolean().optional(),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.any()).optional(),
 });
 
 // GET /api/agents/[id] - Get agent details
@@ -89,7 +89,7 @@ export async function PATCH(
     return NextResponse.json({ agent });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid request data', details: error.issues }, { status: 400 });
     }
     console.error('Error in PATCH /api/agents/[id]:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

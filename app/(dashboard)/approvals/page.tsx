@@ -106,7 +106,7 @@ export default function ApprovalsPage() {
   const getPriorityBadge = (priority: string) => {
     switch (priority) {
       case 'urgent':
-        return <Badge variant="error">Urgent</Badge>;
+        return <Badge variant="danger">Urgent</Badge>;
       case 'high':
         return <Badge variant="warning">High</Badge>;
       case 'medium':
@@ -125,7 +125,7 @@ export default function ApprovalsPage() {
       case 'approved':
         return <Badge variant="success">Approved</Badge>;
       case 'rejected':
-        return <Badge variant="error">Rejected</Badge>;
+        return <Badge variant="danger">Rejected</Badge>;
       case 'expired':
         return <Badge variant="default">Expired</Badge>;
       default:
