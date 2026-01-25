@@ -44,6 +44,14 @@ export async function POST(request: NextRequest) {
     }
 
     // If agent provided an approval_id, check if it's approved
+    let emailData = {
+      to: validatedData.to,
+      subject: validatedData.subject,
+      body: validatedData.body,
+      cc: validatedData.cc,
+      bcc: validatedData.bcc,
+    };
+
     if (validatedData.approval_id) {
       const approval = await getApprovalStatus(validatedData.approval_id);
 
@@ -94,7 +102,15 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // Approval is approved - proceed with sending
+      // Approval is approved - use the email data from the approval's action_payload
+      // This ensures we send exactly what was approved
+      emailData = {
+        to: approval.action_payload.to,
+        subject: approval.action_payload.subject,
+        body: approval.action_payload.body,
+        cc: approval.action_payload.cc,
+        bcc: approval.action_payload.bcc,
+      };
     } else {
       // No approval_id provided - check if approval is needed
       const actionPayload = {
@@ -139,14 +155,8 @@ export async function POST(request: NextRequest) {
       // No approval needed - proceed
     }
 
-    // Send the email
-    const result = await sendGmailEmail(connection, {
-      to: validatedData.to,
-      subject: validatedData.subject,
-      body: validatedData.body,
-      cc: validatedData.cc,
-      bcc: validatedData.bcc,
-    });
+    // Send the email using the email data (either from request or from approval)
+    const result = await sendGmailEmail(connection, emailData);
 
     return NextResponse.json({
       success: true,
