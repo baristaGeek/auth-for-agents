@@ -19,7 +19,7 @@ Once you give an AI agent your OAuth tokens, it can do anything with no oversigh
    Send a test email to yourself or test against another custom rule, to see how the agent reasons about each email
 5. **(Optional) Integrate your agent to your code**: Build custom agentic Gmail flows with our API and your API key
    ```bash
-   curl -H "Authorization: Bearer ak_live_0212e25f9aadb19d79176b07ad1f2521c0fd5319871976317e9a014f9db013b8" \
+   curl -H "Authorization: Bearer ak_live_0212e25f9aad..." \
      https://your-app.com/api/endpoint
    ```
    Example: Request Gmail Access
